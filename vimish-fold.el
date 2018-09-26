@@ -357,7 +357,9 @@ If NESTED is set to t, put the overlay property nested to the new overlay."
         #'vimish-fold--overlay-max-start
         (cl-remove-if
          #'vimish-fold--folded-vimish-overlay-p
-         (overlays-at (point)))))
+         (cl-remove-if-not
+          #'vimish-fold--vimish-overlay-p
+          (overlays-at (point))))))
     (mapc #'vimish-fold--refold (overlays-at (point)))))
 
 (define-key vimish-fold-unfolded-keymap (kbd "C-`") #'vimish-fold-refold)
